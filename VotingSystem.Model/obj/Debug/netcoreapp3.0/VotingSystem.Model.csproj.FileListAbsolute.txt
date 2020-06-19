@@ -1,0 +1,8 @@
+D:\zobi\Timo\VotingSystem.Model\bin\Debug\netcoreapp3.0\VotingSystem.Model.deps.json
+D:\zobi\Timo\VotingSystem.Model\bin\Debug\netcoreapp3.0\VotingSystem.Model.dll
+D:\zobi\Timo\VotingSystem.Model\bin\Debug\netcoreapp3.0\VotingSystem.Model.pdb
+D:\zobi\Timo\VotingSystem.Model\obj\Debug\netcoreapp3.0\VotingSystem.Model.csprojAssemblyReference.cache
+D:\zobi\Timo\VotingSystem.Model\obj\Debug\netcoreapp3.0\VotingSystem.Model.AssemblyInfoInputs.cache
+D:\zobi\Timo\VotingSystem.Model\obj\Debug\netcoreapp3.0\VotingSystem.Model.AssemblyInfo.cs
+D:\zobi\Timo\VotingSystem.Model\obj\Debug\netcoreapp3.0\VotingSystem.Model.dll
+D:\zobi\Timo\VotingSystem.Model\obj\Debug\netcoreapp3.0\VotingSystem.Model.pdb

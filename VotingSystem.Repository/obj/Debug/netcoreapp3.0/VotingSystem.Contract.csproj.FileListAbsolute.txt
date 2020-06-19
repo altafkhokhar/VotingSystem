@@ -1,0 +1,11 @@
+D:\zobi\Timo\VotingSystem.Repository\bin\Debug\netcoreapp3.0\VotingSystem.Contract.deps.json
+D:\zobi\Timo\VotingSystem.Repository\bin\Debug\netcoreapp3.0\VotingSystem.Contract.dll
+D:\zobi\Timo\VotingSystem.Repository\bin\Debug\netcoreapp3.0\VotingSystem.Contract.pdb
+D:\zobi\Timo\VotingSystem.Repository\obj\Debug\netcoreapp3.0\VotingSystem.Contract.csprojAssemblyReference.cache
+D:\zobi\Timo\VotingSystem.Repository\obj\Debug\netcoreapp3.0\VotingSystem.Contract.AssemblyInfoInputs.cache
+D:\zobi\Timo\VotingSystem.Repository\obj\Debug\netcoreapp3.0\VotingSystem.Contract.AssemblyInfo.cs
+D:\zobi\Timo\VotingSystem.Repository\obj\Debug\netcoreapp3.0\VotingSystem.Contract.csproj.CopyComplete
+D:\zobi\Timo\VotingSystem.Repository\obj\Debug\netcoreapp3.0\VotingSystem.Contract.dll
+D:\zobi\Timo\VotingSystem.Repository\obj\Debug\netcoreapp3.0\VotingSystem.Contract.pdb
+D:\zobi\Timo\VotingSystem.Repository\bin\Debug\netcoreapp3.0\VotingSystem.Models.dll
+D:\zobi\Timo\VotingSystem.Repository\bin\Debug\netcoreapp3.0\VotingSystem.Models.pdb
