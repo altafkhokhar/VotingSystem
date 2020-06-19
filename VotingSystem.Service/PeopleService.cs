@@ -21,6 +21,7 @@ namespace VotingSystem.Service
 
         public int RegisterVoter(PersonDTO newVoter)
         {
+
             int result = 0;
             //1.Candidate 2.Voter
             if (newVoter != null && newVoter.User != null)
@@ -47,6 +48,14 @@ namespace VotingSystem.Service
             }
 
             return result;
+        }
+
+        public int VoteForCandidate(int peopleId, int candidateId, int categoryId)
+        {
+            this.DatabaseContext.Votes.Add(new Votes() { CandidateId = candidateId, CategoryId = categoryId, PeopleId = peopleId });
+            this.DatabaseContext.SaveChanges();
+
+            return 1;
         }
     }
 }
