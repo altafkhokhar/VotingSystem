@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using VotingSystem.Contract.Services;
 using VotingSystem.DTO;
 using VotingSystem.Models;
@@ -9,14 +10,16 @@ namespace VotingSystem.Service
     public class PeopleService : BaseService<People>, IPeopleService
     {
         private readonly IUserService UserService;
-        public PeopleService(IUserService paramUserService, VotingDBContext context) : base(context)
+        private readonly IVoterService VoterService;
+        public PeopleService(IUserService paramUserService, IVoterService paramVoterService, VotingDBContext context) : base(context)
         {
             UserService = paramUserService;
+            VoterService = paramVoterService;
         }
 
-        public IQueryable<People> GetAllVoters()
+        public IQueryable<Voter> GetAllVoters()
         {
-            return this.DatabaseContext.People.Where(x => x.UserType == (int)UserType.Voter);
+            return this.DatabaseContext.Voter.AsQueryable();
         }
 
         public int RegisterVoter(PersonDTO newVoter)
@@ -26,23 +29,26 @@ namespace VotingSystem.Service
             //1.Candidate 2.Voter
             if (newVoter != null && newVoter.User != null)
             {
-                Users user = new Users();
+                User user = new User();
                 user.UserName = newVoter.User.UserName;
                 user.Password = newVoter.User.Password;
                 user.CreatedBy = "Admin";
                 UserService.Add(user);
-                UserService.SaveChanges();
-
+                
                 People person = new People();
                 person.Address = newVoter.Address;
                 person.Age = newVoter.Age;
                 person.CreatedBy = "Admin";
                 person.FirstName = newVoter.FirstName;
                 person.LastName = newVoter.LastName;
-                person.UserId = user.UserId;
-                person.UserType = (int)UserType.Voter;
-
+                person.User = user;
+                
                 this.Add(person);
+
+                Voter voter = new Voter();
+                voter.People = person;
+                voter.CreatedBy = "Admin";
+                VoterService.Add(voter);
 
                 result = this.SaveChanges();
             }
@@ -50,9 +56,9 @@ namespace VotingSystem.Service
             return result;
         }
 
-        public int VoteForCandidate(int peopleId, int candidateId, int categoryId)
+        public int VoteForCandidate(int voterId, int candidateId, int categoryId)
         {
-            this.DatabaseContext.Votes.Add(new Votes() { CandidateId = candidateId, CategoryId = categoryId, PeopleId = peopleId });
+            this.DatabaseContext.Vote.Add(new Vote() { CandidateId = candidateId, CategoryId = categoryId, VoterId = voterId });
             this.DatabaseContext.SaveChanges();
 
             return 1;

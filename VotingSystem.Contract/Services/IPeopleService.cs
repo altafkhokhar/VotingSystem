@@ -9,7 +9,7 @@ namespace VotingSystem.Contract.Services
 {
     public interface IPeopleService : IBaseService<People>
     {
-        public IQueryable<People> GetAllVoters();
+        public IQueryable<Voter> GetAllVoters();
         public int RegisterVoter(PersonDTO newVoter);
         public bool ChangeAge(int peopleId, int age);
     }

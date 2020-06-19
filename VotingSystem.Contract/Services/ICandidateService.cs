@@ -6,7 +6,7 @@ using VotingSystem.Models;
 
 namespace VotingSystem.Contract.Services
 {
-    public interface ICandidateService :IBaseService<Candidates>
+    public interface ICandidateService :IBaseService<Candidate>
     {
         public int RegisterCandidate(CandidateDTO newCandidate);
         public bool AddCandidateToCategory(int categoryId, int peopleId);

@@ -7,10 +7,20 @@ namespace VotingSystem.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : VotingSystemBaseController<Users>
+    public class UserController : VotingSystemBaseController<User>
     {
-        public UserController(IUserService userService) : base(userService)
+        private IUserService userService;
+        public UserController(IUserService paramUserService) : base(paramUserService)
         {
-        }    
+            userService = paramUserService;
+        }
+
+        [HttpDelete]
+        [Route("DeleteUser")]
+        public void DeleteUser(int id)
+        {
+            userService.DeleteUser(id);
+        }
     }
+  
 }

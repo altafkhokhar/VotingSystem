@@ -7,8 +7,8 @@ namespace VotingSystem.Models
     {
         public Category()
         {
-            Candidates = new HashSet<Candidates>();
-            Votes = new HashSet<Votes>();
+            Candidate = new HashSet<Candidate>();
+            Vote = new HashSet<Vote>();
         }
 
         public int CategoryId { get; set; }
@@ -19,7 +19,7 @@ namespace VotingSystem.Models
         public string UpdateBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
 
-        public virtual ICollection<Candidates> Candidates { get; set; }
-        public virtual ICollection<Votes> Votes { get; set; }
+        public virtual ICollection<Candidate> Candidate { get; set; }
+        public virtual ICollection<Vote> Vote { get; set; }
     }
 }

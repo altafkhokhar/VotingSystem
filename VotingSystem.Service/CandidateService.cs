@@ -7,7 +7,7 @@ using VotingSystem.Models;
 
 namespace VotingSystem.Service
 {
-    public class CandidateService : BaseService<Candidates>, ICandidateService 
+    public class CandidateService : BaseService<Candidate>, ICandidateService 
     {
         private readonly IUserService UserService;
         private readonly IPeopleService PeopleService;
@@ -20,7 +20,7 @@ namespace VotingSystem.Service
 
         public bool AddCandidateToCategory(int categoryId, int peopleId)
         {
-            this.Add(new Candidates { CategoryId = categoryId, PeopleId = peopleId, CreatedBy="Admin" });
+            this.Add(new Candidate { CategoryId = categoryId, PeopleId = peopleId, CreatedBy="Admin" });
             this.SaveChanges();
             return true;
         }
@@ -31,29 +31,27 @@ namespace VotingSystem.Service
             //1.Candidate 2.Voter
             if (newCandidate.Person != null && newCandidate.Person.User != null)
             {
-                Users user = new Users();
+                User user = new User();
                 user.UserName = newCandidate.Person.User.UserName;
                 user.Password = newCandidate.Person.User.Password;
                 user.CreatedBy = "Admin";
+                
                 UserService.Add(user);
-                UserService.SaveChanges();
-
+                
                 People person = new People();
                 person.Address = newCandidate.Person.Address;
                 person.Age = newCandidate.Person.Age;
                 person.CreatedBy = "Admin";
                 person.FirstName = newCandidate.Person.FirstName;
                 person.LastName = newCandidate.Person.LastName;
-                person.UserId = user.UserId;
-                person.UserType = 1;
+                
+                person.User = user;
 
                 PeopleService.Add(person);
-                //PeopleService.SaveChanges();
 
-                Candidates candidate = new Candidates();
+                Candidate candidate = new Candidate();
                 candidate.CategoryId = newCandidate.CategoryId;
                 candidate.CreatedBy = "Admin";
-                candidate.PeopleId = person.PeopleId;
                 candidate.People = person;
 
                 this.Add(candidate);

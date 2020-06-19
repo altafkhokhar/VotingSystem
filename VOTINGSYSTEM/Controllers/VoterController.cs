@@ -28,7 +28,7 @@ namespace VotingSystem.API.Controllers
         [HttpGet]
         [Route("GetVoters")]
         ///api/Voters
-        public IEnumerable<People> GetVoters()
+        public IEnumerable<Voter> GetVoters()
         {
             return  peopleService.GetAllVoters();
         }

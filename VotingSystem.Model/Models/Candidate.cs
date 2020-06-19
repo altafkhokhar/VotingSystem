@@ -3,11 +3,15 @@ using System.Collections.Generic;
 
 namespace VotingSystem.Models
 {
-    public partial class Votes
+    public partial class Candidate
     {
-        public int VoterId { get; set; }
+        public Candidate()
+        {
+            Vote = new HashSet<Vote>();
+        }
+
+        public int CandidateId { get; set; }
         public int? PeopleId { get; set; }
-        public int? CandidateId { get; set; }
         public int? CategoryId { get; set; }
         public bool? IsDeleted { get; set; }
         public string CreatedBy { get; set; }
@@ -15,8 +19,8 @@ namespace VotingSystem.Models
         public string UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
 
-        public virtual Candidates Candidate { get; set; }
         public virtual Category Category { get; set; }
         public virtual People People { get; set; }
+        public virtual ICollection<Vote> Vote { get; set; }
     }
 }

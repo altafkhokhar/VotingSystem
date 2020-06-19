@@ -60,6 +60,10 @@ namespace VOTINGSYSTEM
 
 
             services.AddScoped<ICategoryService,CategoryService>();
+
+            services.AddScoped<IVoterService, VoterService>();
+
+
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPeopleService, PeopleService>();
             services.AddScoped<ICandidateService, CandidateService>();
