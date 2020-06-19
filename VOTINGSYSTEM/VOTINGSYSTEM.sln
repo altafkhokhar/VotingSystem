@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VotingSystem.Contract", "..
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DATA", "DATA", "{4D821C98-A9FA-482E-8657-7B89A6FD58AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VotingSystem.Service", "..\VotingSystem.Service\VotingSystem.Service.csproj", "{48FF2A27-3A8C-426F-A7D2-A3084756EAA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VotingSystem.DTO", "..\VotingSystem.DTO\VotingSystem.DTO.csproj", "{639E4B43-C473-4CBA-B254-4B41FD856A34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +39,14 @@ Global
 		{888152DC-8BB8-44B0-B7FA-8E309D9361CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{888152DC-8BB8-44B0-B7FA-8E309D9361CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{888152DC-8BB8-44B0-B7FA-8E309D9361CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48FF2A27-3A8C-426F-A7D2-A3084756EAA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48FF2A27-3A8C-426F-A7D2-A3084756EAA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48FF2A27-3A8C-426F-A7D2-A3084756EAA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48FF2A27-3A8C-426F-A7D2-A3084756EAA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{639E4B43-C473-4CBA-B254-4B41FD856A34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{639E4B43-C473-4CBA-B254-4B41FD856A34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{639E4B43-C473-4CBA-B254-4B41FD856A34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{639E4B43-C473-4CBA-B254-4B41FD856A34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

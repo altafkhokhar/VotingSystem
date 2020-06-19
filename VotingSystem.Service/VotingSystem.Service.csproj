@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VotingSystem.ORMContext\VotingSystem.Repository.csproj" />
+    <ProjectReference Include="..\VotingSystem.Repository\VotingSystem.Contract.csproj" />
+  </ItemGroup>
+
+</Project>

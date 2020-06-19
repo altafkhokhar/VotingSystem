@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using VotingSystem.Contract;
 using VotingSystem.Repository;
 using VotingSystem.Models;
+using VotingSystem.Service;
+using VotingSystem.Contract.Services;
 
 namespace VOTINGSYSTEM
 {
@@ -60,6 +62,13 @@ namespace VOTINGSYSTEM
             services.AddDbContext<VotingDBContext>(options => options.UseSqlServer(connectionString));
             services.AddScoped<IVoterRepository, VoterRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICandidateRepository, CandidateRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPeopleRepository, PeopleRepository>();
+
+            services.AddScoped<ICandidateService, CandidateService>();
+
+
         }
     }
 }

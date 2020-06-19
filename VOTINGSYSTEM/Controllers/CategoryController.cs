@@ -14,10 +14,11 @@ namespace VotingSystem.API.Controllers
 
         [HttpPost]
         [Route("PostCategory")] //api/Voters/GetVoterById? id = 2
-        public string PostCategory(Category category)
+        public int PostCategory(Category category)
         {
-            return  "test";
-
+            Repository.Add(category);
+            int result = Repository.SaveChanges();
+            return result;
         }
 
         //[Route("[SaveCategoryPostCategory

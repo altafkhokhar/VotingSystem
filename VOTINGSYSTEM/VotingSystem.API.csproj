@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\VotingSystem.ORMContext\VotingSystem.Repository.csproj" />
     <ProjectReference Include="..\VotingSystem.Repository\VotingSystem.Contract.csproj" />
+    <ProjectReference Include="..\VotingSystem.Service\VotingSystem.Service.csproj" />
   </ItemGroup>
 
 </Project>

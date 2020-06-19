@@ -11,5 +11,6 @@ namespace VotingSystem.Contract
         Task<List<TModel>> GetAll();
         void Add(TModel entity);
         void Remove(TModel entity);
+        int SaveChanges();
     }
 }

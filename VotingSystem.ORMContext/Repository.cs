@@ -34,5 +34,10 @@ namespace VotingSystem.Repository
         {
             DatabaseContext.Set<TModel>().Remove(entity);
         }
+
+        public int SaveChanges()
+        {
+            return DatabaseContext.SaveChanges();
+        }
     }
 }
