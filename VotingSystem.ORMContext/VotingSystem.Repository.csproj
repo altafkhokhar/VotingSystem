@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CandidateRepository.cs" />
+    <Compile Remove="CategoryRepository.cs" />
+    <Compile Remove="PeopleRepository.cs" />
+    <Compile Remove="Repository.cs" />
+    <Compile Remove="UserRepository.cs" />
+    <Compile Remove="VoterRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
   </ItemGroup>
 

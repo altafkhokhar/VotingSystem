@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
-using VotingSystem.API.ViewModel;
-using VotingSystem.Contract;
+
+
 using VotingSystem.Contract.Services;
 using VotingSystem.DTO;
 using VotingSystem.Models;
@@ -10,10 +10,10 @@ namespace VotingSystem.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CandidateController : VotingSystemBaseController<Candidates, ICandidateRepository>
+    public class CandidateController : VotingSystemBaseController<Candidates>
     {
         private ICandidateService CandidateService;
-        public CandidateController(ICandidateRepository candidateRepository, ICandidateService candidateService) : base(candidateRepository)
+        public CandidateController( ICandidateService candidateService) : base(candidateService)
         {
             CandidateService = candidateService;
         }
@@ -23,7 +23,16 @@ namespace VotingSystem.API.Controllers
         public int PostCandidate(CandidateDTO candidate)
         {
             return CandidateService.RegisterCandidate(candidate);
-        }       
+        }
+
+        [HttpPost]
+        [Route("AddCandidateToCategory")] //api/Voters/GetVoterById? id = 2
+        public int AddCandidateToCategory(int categoryId, int peopleId)
+        {
+            this.CandidateService.AddCandidateToCategory(categoryId, peopleId);
+            var result = this.BaseService.SaveChanges();
+            return result;
+        }
 
     }
 }

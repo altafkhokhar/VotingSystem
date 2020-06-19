@@ -5,8 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VotingSystem.ORMContext\VotingSystem.Repository.csproj" />
-    <ProjectReference Include="..\VotingSystem.Repository\VotingSystem.Contract.csproj" />
+    <ProjectReference Include="..\VotingSystem.Contract\VotingSystem.Contract.csproj" />
   </ItemGroup>
 
 </Project>

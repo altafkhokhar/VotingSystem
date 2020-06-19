@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ICandidateRepository.cs" />
+    <Compile Remove="ICategoryRepository.cs" />
+    <Compile Remove="IPeopleRepository.cs" />
+    <Compile Remove="IPeopleService.cs" />
+    <Compile Remove="IRepository.cs" />
+    <Compile Remove="IUserRepository.cs" />
+    <Compile Remove="IVoterRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VotingSystem.DTO\VotingSystem.DTO.csproj" />
+    <ProjectReference Include="..\VotingSystem.Model\VotingSystem.Models.csproj" />
+  </ItemGroup>
+
+</Project>

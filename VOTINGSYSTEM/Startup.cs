@@ -1,16 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
-using Microsoft.EntityFrameworkCore;
-
-using VotingSystem.Contract;
-using VotingSystem.Repository;
+using VotingSystem.Contract.Services;
 using VotingSystem.Models;
 using VotingSystem.Service;
-using VotingSystem.Contract.Services;
 
 namespace VOTINGSYSTEM
 {
@@ -60,15 +56,13 @@ namespace VOTINGSYSTEM
         {
             string connectionString = Configuration.GetConnectionString("VOTINGSYSTEM_DB_STRING");
             services.AddDbContext<VotingDBContext>(options => options.UseSqlServer(connectionString));
-            services.AddScoped<IVoterRepository, VoterRepository>();
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<ICandidateRepository, CandidateRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IPeopleRepository, PeopleRepository>();
+           
 
+
+            services.AddScoped<ICategoryService,CategoryService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IPeopleService, PeopleService>();
             services.AddScoped<ICandidateService, CandidateService>();
-
-
         }
     }
 }

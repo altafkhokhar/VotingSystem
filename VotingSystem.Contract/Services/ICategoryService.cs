@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using VotingSystem.Models;
 
-namespace VotingSystem.Contract
+namespace VotingSystem.Contract.Services
 {
-    public interface ICategoryRepository : IRepository<Category>
+    public interface ICategoryService : IBaseService<Category>
     {
-       
     }
 }

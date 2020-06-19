@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VotingSystem.Contract;
+using VotingSystem.Contract.Services;
 using VotingSystem.Models;
 
 namespace VotingSystem.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoryController : VotingSystemBaseController<Category, ICategoryRepository>
+    public class CategoryController : VotingSystemBaseController<Category>
     {
-        public CategoryController(ICategoryRepository categoryRepository) : base(categoryRepository)
+        public CategoryController(ICategoryService categoryService) : base(categoryService)
         {
         }
 
@@ -16,10 +17,12 @@ namespace VotingSystem.API.Controllers
         [Route("PostCategory")] //api/Voters/GetVoterById? id = 2
         public int PostCategory(Category category)
         {
-            Repository.Add(category);
-            int result = Repository.SaveChanges();
+            this.BaseService.Add(category);
+            var result = this.BaseService.SaveChanges();
             return result;
         }
+
+        
 
         //[Route("[SaveCategoryPostCategory
         //[HttpGet]

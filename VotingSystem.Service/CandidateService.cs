@@ -1,24 +1,28 @@
 ﻿using System;
-using VotingSystem.Contract;
 using VotingSystem.Contract.Services;
 using VotingSystem.DTO;
 using VotingSystem.Models;
-using VotingSystem.Repository;
+
 
 namespace VotingSystem.Service
 {
-    public class CandidateService : BaseService, ICandidateService 
+    public class CandidateService : BaseService<Candidates>, ICandidateService 
     {
-        private readonly ICandidateRepository CandidateRepository;
-        private readonly IUserRepository UserRepository;
-        private readonly IPeopleRepository PeopleRepository;
-        public CandidateService(ICandidateRepository repository, IUserRepository userRepository, IPeopleRepository peopleRepository)
+        private readonly IUserService UserService;
+        private readonly IPeopleService PeopleService;
+        public CandidateService(IUserService userService, IPeopleService peopleService, VotingDBContext context)  : base(context)
         {
-            CandidateRepository = repository;
-            UserRepository = userRepository;
-            PeopleRepository = peopleRepository;
+           
+            UserService = userService;
+            PeopleService = peopleService;
         }
 
+        public bool AddCandidateToCategory(int categoryId, int peopleId)
+        {
+            this.Add(new Candidates { CategoryId = categoryId, PeopleId = peopleId, CreatedBy="Admin" });
+            this.SaveChanges();
+            return true;
+        }
 
         public int RegisterCandidate(CandidateDTO newCandidate)
         {
@@ -30,8 +34,8 @@ namespace VotingSystem.Service
                 user.UserName = newCandidate.Person.User.UserName;
                 user.Password = newCandidate.Person.User.Password;
                 user.CreatedBy = "Admin";
-                UserRepository.Add(user);
-                UserRepository.SaveChanges();
+                UserService.Add(user);
+                UserService.SaveChanges();
 
                 People person = new People();
                 person.Address = newCandidate.Person.Address;
@@ -42,22 +46,21 @@ namespace VotingSystem.Service
                 person.UserId = user.UserId;
                 person.UserType = 1;
 
-                PeopleRepository.Add(person);
-                UserRepository.SaveChanges();
+                PeopleService.Add(person);
+                //PeopleService.SaveChanges();
 
                 Candidates candidate = new Candidates();
                 candidate.CategoryId = newCandidate.CategoryId;
                 candidate.CreatedBy = "Admin";
                 candidate.PeopleId = person.PeopleId;
+                candidate.People = person;
 
+                this.Add(candidate);
                 
-                
-                CandidateRepository.Add(candidate);
-                
-                result = CandidateRepository.SaveChanges();
+                result = this.SaveChanges();
             }
 
             return result;
-        }
+        }        
     }
 }

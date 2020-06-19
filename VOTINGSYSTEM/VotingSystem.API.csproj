@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ViewModel\**" />
+    <Content Remove="ViewModel\**" />
+    <EmbeddedResource Remove="ViewModel\**" />
+    <None Remove="ViewModel\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
@@ -15,8 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VotingSystem.ORMContext\VotingSystem.Repository.csproj" />
-    <ProjectReference Include="..\VotingSystem.Repository\VotingSystem.Contract.csproj" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VotingSystem.Contract\VotingSystem.Contract.csproj" />
+    <ProjectReference Include="..\VotingSystem.Model\VotingSystem.Models.csproj" />
     <ProjectReference Include="..\VotingSystem.Service\VotingSystem.Service.csproj" />
   </ItemGroup>
 

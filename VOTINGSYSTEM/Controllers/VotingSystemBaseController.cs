@@ -1,34 +1,59 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using VotingSystem.Contract;
+using VotingSystem.Contract.Services;
+using VotingSystem.Service;
 
 namespace VotingSystem.API.Controllers
 {
+    //[Route("api/[controller]")]
+    //[ApiController]
+    //public abstract class VotingSystemBaseController<TModel, TRepository> : ControllerBase where TModel : class where TRepository : IRepository<TModel>
+    //{
+    //    protected readonly TRepository Repository;
+
+    //    public VotingSystemBaseController(TRepository repository)
+    //    {
+    //        this.Repository = repository;
+    //    }
+
+    //    [HttpGet]
+    //    public async Task<IEnumerable<TModel>> Get()
+    //    {
+    //        return await Repository.GetAll();
+    //    }
+
+    //    [HttpPost]
+    //    public void Add([FromBody] TModel item)
+    //    {
+    //        Repository.Add(item);
+    //        Repository.SaveChanges();
+    //    }
+    //}
+
     [Route("api/[controller]")]
     [ApiController]
-    public abstract class VotingSystemBaseController<TModel, TRepository> : ControllerBase where TModel : class where TRepository : IRepository<TModel>
+    public abstract class VotingSystemBaseController<TModel> : ControllerBase where TModel : class
     {
-        protected readonly TRepository Repository;
+        protected readonly IBaseService<TModel> BaseService;
 
-        public VotingSystemBaseController(TRepository repository)
+        public VotingSystemBaseController(IBaseService<TModel> paramService)
         {
-            this.Repository = repository;
+            BaseService = paramService;
         }
 
         [HttpGet]
         public async Task<IEnumerable<TModel>> Get()
         {
-            return await Repository.GetAll();
+            return await this.BaseService.GetAll();
         }
 
         [HttpPost]
         public void Add([FromBody] TModel item)
         {
-            Repository.Add(item);
+            this.BaseService.Add(item);
+            this.BaseService.SaveChanges();
         }
     }
 }
