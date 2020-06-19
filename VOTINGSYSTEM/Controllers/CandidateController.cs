@@ -34,5 +34,15 @@ namespace VotingSystem.API.Controllers
             return result;
         }
 
+        [HttpGet]
+        [Route("GetVotesOfCandidate")] //api/Voters/GetVoterById? id = 2
+        public int GetVotesOfCandidate(int candidateId)
+        {
+            //this.CandidateService.AddCandidateToCategory(categoryId, peopleId);
+            //var result = this.BaseService.SaveChanges();
+            //return result;
+            return 1;
+        }
+
     }
 }

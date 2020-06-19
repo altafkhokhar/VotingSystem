@@ -14,9 +14,9 @@ namespace VotingSystem.API.Controllers
         }
 
         [HttpPost]
-        [Route("PostCategory")] //api/Voters/GetVoterById? id = 2
+        [Route("PostCategory")] 
         public int PostCategory(Category category)
-        {
+        {   
             this.BaseService.Add(category);
             var result = this.BaseService.SaveChanges();
             return result;

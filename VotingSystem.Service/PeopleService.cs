@@ -16,7 +16,7 @@ namespace VotingSystem.Service
 
         public IQueryable<People> GetAllVoters()
         {
-            return  this.DatabaseContext.People.Where(x => x.UserType == (int)UserType.Voter);
+            return this.DatabaseContext.People.Where(x => x.UserType == (int)UserType.Voter);
         }
 
         public int RegisterVoter(PersonDTO newVoter)
@@ -43,7 +43,7 @@ namespace VotingSystem.Service
                 person.UserType = (int)UserType.Voter;
 
                 this.Add(person);
-                
+
                 result = this.SaveChanges();
             }
 
@@ -56,6 +56,14 @@ namespace VotingSystem.Service
             this.DatabaseContext.SaveChanges();
 
             return 1;
+        }
+
+        public bool ChangeAge(int peopleId, int age)
+        {
+            this.DatabaseContext.People.Where(wh => wh.PeopleId == peopleId).FirstOrDefault().Age = age;
+            this.DatabaseContext.SaveChanges();
+
+            return true;
         }
     }
 }

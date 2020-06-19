@@ -32,5 +32,13 @@ namespace VotingSystem.API.Controllers
         {
             return  peopleService.GetAllVoters();
         }
+
+        [HttpPost]
+        [Route("ChangeAge")]
+        public int ChangeAge(int peopleId, int age)
+        {
+            //return peopleService.ChangeAge(peopleId, age);
+            return 1;
+        }
     }
 }

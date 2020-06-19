@@ -11,5 +11,6 @@ namespace VotingSystem.Contract.Services
     {
         public IQueryable<People> GetAllVoters();
         public int RegisterVoter(PersonDTO newVoter);
+        public bool ChangeAge(int peopleId, int age);
     }
 }

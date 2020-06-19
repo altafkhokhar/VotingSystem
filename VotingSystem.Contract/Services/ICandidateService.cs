@@ -10,5 +10,6 @@ namespace VotingSystem.Contract.Services
     {
         public int RegisterCandidate(CandidateDTO newCandidate);
         public bool AddCandidateToCategory(int categoryId, int peopleId);
+        public dynamic GetVotesOfCandidate(int candidateId);
     }
 }

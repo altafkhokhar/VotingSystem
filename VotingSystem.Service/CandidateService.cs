@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using VotingSystem.Contract.Services;
 using VotingSystem.DTO;
 using VotingSystem.Models;
@@ -61,6 +62,13 @@ namespace VotingSystem.Service
             }
 
             return result;
-        }        
+        }
+
+        public dynamic GetVotesOfCandidate(int candidateId)
+        {
+            //this.DatabaseContext.Votes.GroupBy(x=> x.CategoryId).Select()
+            return null;
+        
+        }
     }
 }
