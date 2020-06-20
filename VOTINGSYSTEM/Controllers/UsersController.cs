@@ -6,6 +6,9 @@ using VotingSystem.Models;
 
 namespace VotingSystem.API.Controllers
 {
+    /// <summary>
+    /// It deals with User activities
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : VotingSystemBaseController<User>
@@ -16,6 +19,12 @@ namespace VotingSystem.API.Controllers
             userService = paramUserService;
         }
 
+
+        /// <summary>
+        /// It will remove user(soft delete)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         [Route("DeleteUser")]
         public ActionResult DeleteUser([FromRoute]int id)

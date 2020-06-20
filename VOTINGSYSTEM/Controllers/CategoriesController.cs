@@ -5,6 +5,9 @@ using VotingSystem.Models;
 
 namespace VotingSystem.API.Controllers
 {
+    /// <summary>
+    /// It will deal with category
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController : VotingSystemBaseController<Category>

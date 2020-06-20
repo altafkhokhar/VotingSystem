@@ -9,7 +9,10 @@ using VotingSystem.Contract.Services;
 namespace VotingSystem.API.Controllers
 {
    
-
+    /// <summary>
+    /// Base class for all API controller
+    /// </summary>
+    /// <typeparam name="TModel"></typeparam>
     [Route("api/[controller]")]
     [ApiController]
     public abstract class VotingSystemBaseController<TModel> : ControllerBase where TModel : class
@@ -21,12 +24,22 @@ namespace VotingSystem.API.Controllers
             BaseService = paramService;
         }
 
+
+        /// <summary>
+        /// It will return all records
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IEnumerable<TModel>> Get()
         {  
                 return await this.BaseService.GetAll();
          }
 
+        /// <summary>
+        /// It will create new record
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult<TModel> Add([FromBody] TModel item)
         {
@@ -41,7 +54,11 @@ namespace VotingSystem.API.Controllers
             return Created(nameof(GetItem), item );
             
         }
-
+        /// <summary>
+        /// It will return one record using id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
 
         [HttpGet("{id}")] //api/Categories/2
         public virtual ActionResult<TModel> GetItem([FromRoute] int id)

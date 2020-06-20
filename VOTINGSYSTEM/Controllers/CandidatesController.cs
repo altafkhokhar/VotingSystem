@@ -7,6 +7,10 @@ using VotingSystem.Models;
 
 namespace VotingSystem.API.Controllers
 {
+
+    /// <summary>
+    /// It will deal with Candidate
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class CandidatesController : VotingSystemBaseController<Candidate>
@@ -17,6 +21,11 @@ namespace VotingSystem.API.Controllers
             CandidateService = candidateService;
         }
 
+        /// <summary>
+        /// It will register new candidate
+        /// </summary>
+        /// <param name="candidate"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("PostCandidate")] //api/PostCandidate
         public ActionResult PostCandidate(CandidateDTO candidate)
@@ -30,6 +39,12 @@ namespace VotingSystem.API.Controllers
             return Created(nameof(GetItem), candidate);
         }
 
+        /// <summary>
+        /// It will associate candidate with category
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <param name="peopleId"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("AddCandidateToCategory")] //api/Voters/GetVoterById? id = 2
         public ActionResult AddCandidateToCategory(int categoryId, int peopleId)
@@ -47,6 +62,12 @@ namespace VotingSystem.API.Controllers
             return StatusCode(StatusCodes.Status200OK); 
         }
 
+
+        /// <summary>
+        /// It willl return Vote count of particular candiate
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         [Route("VotesOfCandidate")] //api/Candidates/VotesOfCandidate? id = 2
         public ActionResult<IList<CandidateResult>> VotesOfCandidate([FromRoute] int id)

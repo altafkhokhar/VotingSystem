@@ -9,6 +9,9 @@ using VotingSystem.Models;
 
 namespace VotingSystem.API.Controllers
 {
+    /// <summary>
+    /// It deals with Voter stuff
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class VotersController :  VotingSystemBaseController<Voter>
@@ -21,6 +24,11 @@ namespace VotingSystem.API.Controllers
             voterService = paeramVoterService;
         }        
 
+        /// <summary>
+        /// It will register new voter
+        /// </summary>
+        /// <param name="newVoter"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("RegisterVoter")] 
         public  ActionResult RegisterVoter(PersonDTO newVoter)
@@ -38,7 +46,10 @@ namespace VotingSystem.API.Controllers
             return Created(nameof(GetItem), newVoter);
         }
 
-
+        /// <summary>
+        /// It will return all voters.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetVoters")]
         ///api/Voters
@@ -47,6 +58,12 @@ namespace VotingSystem.API.Controllers
             return  peopleService.GetAllVoters();
         }
 
+
+        /// <summary>
+        /// It will update age of voter
+        /// </summary>
+        /// <param name="voterdto"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("ChangeAge")]
         public ActionResult ChangeAge([FromBody]VoterDTO voterdto)
@@ -67,6 +84,12 @@ namespace VotingSystem.API.Controllers
             return StatusCode(StatusCodes.Status200OK);
         }
 
+
+        /// <summary>
+        /// It will return voter using id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")] //api/Voters/1
         public override ActionResult<Voter> GetItem([FromRoute] int id)
         {
@@ -80,6 +103,11 @@ namespace VotingSystem.API.Controllers
             return item;
         }
 
+        /// <summary>
+        /// It will submit vote for candidate to particular category from voter
+        /// </summary>
+        /// <param name="voteDto"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("VoteForCandidate")]
         public ActionResult VoteForCandidate([FromBody]VoteDTO voteDto)
