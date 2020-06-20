@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using VotingSystem.Contract.Services;
 using VotingSystem.DTO;
@@ -15,11 +18,14 @@ namespace VotingSystem.Service
     {
         private readonly IUserService UserService;
         private readonly IPeopleService PeopleService;
-        public CandidateService(IUserService userService, IPeopleService peopleService, VotingDBContext context)  : base(context)
+        private IConfiguration Configuration;
+
+        public CandidateService(IUserService userService, IPeopleService peopleService, IConfiguration configuration, VotingDBContext context)  : base(context)
         {
            
             UserService = userService;
             PeopleService = peopleService;
+            Configuration = configuration;
         }
 
 
@@ -109,16 +115,39 @@ namespace VotingSystem.Service
         {
             try
             {   
-                List<CandidateResult> candidateResults = new List<CandidateResult>();
-                //todo
+                var candidateResults = new List<CandidateResult>();
+
+                string conString = Configuration.GetConnectionString(VotingSystem.Contract.Helpers.VSHelper.VOTINSYSTEM_DB_STRING);
+                var con = new SqlConnection(conString);
+                con.Open();
+                                
+                string CommandText = VotingSystem.Contract.Helpers.VSHelper.PROC_CANDIDATE_VOTE_COUNT + " @CandidateId" ;
+                var cmd = new SqlCommand(CommandText);
+                cmd.Connection = con;
+
+                cmd.Parameters.Add(
+                    new SqlParameter("@CandidateId", System.Data.SqlDbType.Int));
+
+                cmd.Parameters["@CandidateId"].Value = candidateId;
+                                
+                var reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {         
+                    int CategoryId = Convert.ToInt32(reader["CategoryId"]);
+                    string CategoryName = Convert.ToString(reader["CategoryName"]);
+                    int VoteCount = Convert.ToInt32(reader["VoteCount"]);
+
+                    candidateResults.Add(new CandidateResult {CandidateId = candidateId, CategoryId = CategoryId, CategoryName = CategoryName, TotalVotes = VoteCount });
+                    
+                }
+                
                 return candidateResults;
             }
             catch(Exception ex)
             {
                 throw;
             }
-
-            return null;
         }
     }
 }

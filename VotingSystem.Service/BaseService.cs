@@ -12,7 +12,6 @@ namespace VotingSystem.Service
     /// <typeparam name="TModel"></typeparam>
     public abstract class BaseService<TModel> : IBaseService<TModel> where TModel : class
     {
-
         protected readonly VotingDBContext DatabaseContext;
 
         public BaseService(VotingDBContext context)

@@ -38,7 +38,7 @@ namespace VotingSystem.Service
                         var alreadyVoted = this.DatabaseContext.Vote.FirstOrDefault(wh => wh.VoterId == voterId);
                         if (alreadyVoted != null)
                         {
-                            if (paramAge < MIN_AGE_FOR_VOTING)
+                            if (paramAge < VotingSystem.Contract.Helpers.VSHelper.MIN_AGE_FOR_VOTING)
                             {
                                 return -2; // can not update age below 18 since he/she already voted.
                             }
