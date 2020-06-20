@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using VotingSystem.Contract.Services;
 using VotingSystem.DTO;
 using VotingSystem.Models;
@@ -46,14 +47,20 @@ namespace VotingSystem.API.Controllers
             return StatusCode(StatusCodes.Status200OK); 
         }
 
-        [HttpGet]
-        [Route("GetVotesOfCandidate")] //api/Voters/GetVoterById? id = 2
-        public int GetVotesOfCandidate(int candidateId)
+        [HttpGet("{id}")]
+        [Route("VotesOfCandidate")] //api/Candidates/VotesOfCandidate? id = 2
+        public ActionResult<IList<CandidateResult>> VotesOfCandidate([FromRoute] int id)
         {
-            //this.CandidateService.AddCandidateToCategory(categoryId, peopleId);
-            //var result = this.BaseService.SaveChanges();
-            //return result;
-            return 1;
+            try
+            {
+                return StatusCode(StatusCodes.Status200OK, this.CandidateService.GetVotesOfCandidate(id));
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+
         }
     }
 }
