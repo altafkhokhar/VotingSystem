@@ -18,18 +18,24 @@ namespace VotingSystem.Service
             PeopleService = peopleService;
         }
 
-        public bool TryAddCandidateToCategory(int categoryId, int peopleId)
+        public int TryAddCandidateToCategory(int categoryId, int peopleId)
         {
             try
             {
+                var category = this.DatabaseContext.Category.Where(wh => wh.CategoryId == categoryId).FirstOrDefault();
+                var people = this.DatabaseContext.People.Where(x => x.PeopleId == peopleId).FirstOrDefault();
+                if (category == null || people == null)
+                {
+                    return -2; // bad request category or people is not exist.
+                }
                 this.Add(new Candidate { CategoryId = categoryId, PeopleId = peopleId, CreatedBy = "Admin" });
                 this.SaveChanges();
             }
             catch
             {
-                return false;
+                return -1; // error
             }
-            return true;
+            return 1; // done.
         }
 
         public bool TryRegisterCandidate(ref CandidateDTO newCandidate)

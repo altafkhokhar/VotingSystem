@@ -9,7 +9,7 @@ namespace VotingSystem.Contract.Services
     public interface ICandidateService :IBaseService<Candidate>
     {
         public bool TryRegisterCandidate(ref CandidateDTO newCandidate);
-        public bool TryAddCandidateToCategory(int categoryId, int peopleId);
+        public int TryAddCandidateToCategory(int categoryId, int peopleId);
         public dynamic GetVotesOfCandidate(int candidateId);
     }
 }

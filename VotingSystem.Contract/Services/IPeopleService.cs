@@ -10,7 +10,7 @@ namespace VotingSystem.Contract.Services
     public interface IPeopleService : IBaseService<People>
     {
         public IQueryable<Voter> GetAllVoters();
-        public bool RegisterVoter(ref PersonDTO newVoter);
-        public bool ChangeAge(int peopleId, int age);
+        public int RegisterVoter(ref PersonDTO newVoter);
+       
     }
 }

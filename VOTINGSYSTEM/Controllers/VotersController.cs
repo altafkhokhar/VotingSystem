@@ -25,14 +25,17 @@ namespace VotingSystem.API.Controllers
         [Route("RegisterVoter")] 
         public  ActionResult RegisterVoter(PersonDTO newVoter)
         {
-            if (!peopleService.RegisterVoter(ref newVoter))
+            var result = peopleService.RegisterVoter(ref newVoter);
+            if (result == -1) // error
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
+            else if (result == -2)
+                return StatusCode(StatusCodes.Status400BadRequest, "Can not register person as voter her/his age is below 18!");// can not update due to below 18
+            
 
-            newVoter.User = null;
+            newVoter.User = null;//to hide user detail;
             return Created(nameof(GetItem), newVoter);
-
         }
 
 
@@ -46,10 +49,22 @@ namespace VotingSystem.API.Controllers
 
         [HttpPost]
         [Route("ChangeAge")]
-        public int ChangeAge(int peopleId, int age)
+        public ActionResult ChangeAge([FromBody]VoterDTO voterdto)
         {
-            //return peopleService.ChangeAge(peopleId, age);
-            return 1;
+            try
+            {
+                var result = voterService.ChangeAge(voterdto.VoterId, voterdto.Age);
+                if (result == 1)
+                    return StatusCode(StatusCodes.Status200OK);
+                else if(result == -2)
+                    return StatusCode(StatusCodes.Status400BadRequest,"Can not update Age!");// can not update due to below 18
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+            return StatusCode(StatusCodes.Status200OK);
         }
 
         [HttpGet("{id}")] //api/Voters/1
@@ -63,7 +78,28 @@ namespace VotingSystem.API.Controllers
             }
 
             return item;
+        }
 
+        [HttpPost]
+        [Route("VoteForCandidate")]
+        public ActionResult VoteForCandidate([FromBody]VoteDTO voteDto)
+        {
+            try
+            {
+                var result = voterService.VoteForCandidate(voteDto.VoterId, voteDto.CanndidateId, voteDto.CategoryId );
+                if (result == -1)
+                    return StatusCode(StatusCodes.Status500InternalServerError);
+                else if (result == -2)
+                    return StatusCode(StatusCodes.Status400BadRequest, "Resource not found");// can not update due to below 18
+                else if(result == -3)
+                    return StatusCode(StatusCodes.Status400BadRequest, "Can not Vote!");// can not vote already voted for category and candidate 
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+            return StatusCode(StatusCodes.Status200OK);
         }
     }
 }

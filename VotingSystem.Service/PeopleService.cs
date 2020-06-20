@@ -23,10 +23,15 @@ namespace VotingSystem.Service
             return this.DatabaseContext.Voter.AsQueryable();
         }
 
-        public bool RegisterVoter(ref PersonDTO newVoter)
+        public int RegisterVoter(ref PersonDTO newVoter)
         {
             try
             {
+                if (newVoter.Age < 18)
+                {
+                    return -2; // can not register as voter since person is below 18
+                }
+
                  //1.Candidate 2.Voter
                 if (newVoter != null && newVoter.User != null)
                 {
@@ -57,9 +62,9 @@ namespace VotingSystem.Service
             }
             catch(Exception ex)
             {
-                return false;
+                return -1;
             }
-            return true;
+            return 1;
         }
 
         public int VoteForCandidate(int voterId, int candidateId, int categoryId)
@@ -70,12 +75,6 @@ namespace VotingSystem.Service
             return 1;
         }
 
-        public bool ChangeAge(int peopleId, int age)
-        {
-            this.DatabaseContext.People.Where(wh => wh.PeopleId == peopleId).FirstOrDefault().Age = age;
-            this.DatabaseContext.SaveChanges();
-
-            return true;
-        }
+        
     }
 }

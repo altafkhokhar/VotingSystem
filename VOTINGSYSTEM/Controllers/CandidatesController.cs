@@ -33,10 +33,16 @@ namespace VotingSystem.API.Controllers
         [Route("AddCandidateToCategory")] //api/Voters/GetVoterById? id = 2
         public ActionResult AddCandidateToCategory(int categoryId, int peopleId)
         {
-            if (!this.CandidateService.TryAddCandidateToCategory(categoryId, peopleId))
+            var result = this.CandidateService.TryAddCandidateToCategory(categoryId, peopleId);
+            if (result == -1)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
+            else if (result == -2)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest);
+            }
+
             return StatusCode(StatusCodes.Status200OK); 
         }
 

@@ -38,9 +38,8 @@ namespace VotingSystem.API.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
-            //var createdResult = new CreatedResult();
             return Created(nameof(GetItem), item );
-            //return ("Resource created successfully!");
+            
         }
 
 
