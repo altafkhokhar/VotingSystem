@@ -110,11 +110,13 @@ GO
 ALTER TABLE [dbo].[Candidate] CHECK CONSTRAINT [FK_Candidates_Category]
 GO
 
-ALTER TABLE [dbo].[Candidate] ADD  CONSTRAINT [UQ_Candidate] UNIQUE NONCLUSTERED 
+ALTER TABLE [dbo].[Candidate] ADD  CONSTRAINT [UQ_Category_People] UNIQUE NONCLUSTERED 
 (
-	[CandidateId] ASC
+	[CategoryId], [PeopleId] 
 )
 GO
+
+
 
 CREATE TABLE [dbo].[Voter](
 	[VoterId] [int] IDENTITY(1,1) NOT NULL,

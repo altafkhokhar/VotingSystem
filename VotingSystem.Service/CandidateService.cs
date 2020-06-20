@@ -41,10 +41,14 @@ namespace VotingSystem.Service
             {
                 var category = this.DatabaseContext.Category.Where(wh => wh.CategoryId == categoryId).FirstOrDefault();
                 var people = this.DatabaseContext.People.Where(x => x.PeopleId == peopleId).FirstOrDefault();
-                if (category == null || people == null)
+
+                var candidate = this.DatabaseContext.Candidate.Where(wh => wh.CategoryId == categoryId && wh.PeopleId == peopleId).FirstOrDefault();
+
+                if (category == null || people == null || candidate != null)
                 {
                     return -2; // bad request category or people is not exist.
                 }
+
                 this.Add(new Candidate { CategoryId = categoryId, PeopleId = peopleId, CreatedBy = "Admin" });
                 this.SaveChanges();
             }

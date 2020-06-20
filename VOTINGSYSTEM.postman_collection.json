@@ -1,0 +1,250 @@
+{
+	"variables": [],
+	"info": {
+		"name": "VOTINGSYSTEM",
+		"_postman_id": "4298ebcc-9e28-8cd9-afc6-79318947f026",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "PostCategory",
+			"request": {
+				"url": "https://localhost:44319/api/Categories",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"CategoryName\" : \"IOT DEVELOPER\", \"CreatedBy\" : \"Admin\"}"
+				},
+				"description": "save"
+			},
+			"response": [
+				{
+					"id": "53245b14-99e7-424a-be6b-7373f9f8a217",
+					"name": "PostCategory",
+					"originalRequest": {
+						"url": "https://localhost:44319/api/Category/PostCategory",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"CategoryName\" : \"FirstName\"}"
+						},
+						"description": ""
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plainText",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "text/plain; charset=utf-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Thu, 18 Jun 2020 15:00:23 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "server",
+							"key": "server",
+							"value": "Microsoft-IIS/10.0",
+							"description": "A name for the server"
+						},
+						{
+							"name": "status",
+							"key": "status",
+							"value": "200",
+							"description": "Custom header"
+						},
+						{
+							"name": "x-powered-by",
+							"key": "x-powered-by",
+							"value": "ASP.NET",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"responseTime": 2550,
+					"body": "test"
+				}
+			]
+		},
+		{
+			"name": "PostCandidate",
+			"request": {
+				"url": "https://localhost:44319/api/Candidates/PostCandidate",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"CategoryId\" :18,  \"CreatedBy\" : \"Admin\",\r\n\r\n\"Person\": {\r\n\"User\" :{\r\n\t\"UserName\" :\"QA.IOT\", \"Password\" :\"pwd1\",\"CreatedBy\" : \"Admin\", \"IsDeleted\" : false\r\n\r\n},\r\n\r\n\"FirstName\" : \"QA\", \"LastName\" : \"IOT\", \"AGE\":28, \"ADDRESS\" :\"BHAVNAGAR\",  \"CreatedBy\" : \"Admin\" }\r\n\r\n}\t"
+				},
+				"description": "PostCandidate"
+			},
+			"response": []
+		},
+		{
+			"name": "GetVoters",
+			"request": {
+				"url": "https://localhost:44319/api/Voters/4",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "RegisterVoter",
+			"request": {
+				"url": "https://localhost:44319/api/Voters/RegisterVoter",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\"User\" :{\r\n\t\"UserName\" :\"Chris.cains\", \"Password\" :\"pwd1\",\"CreatedBy\" : \"Admin\", \"IsDeleted\" : false\r\n\r\n},\r\n\r\n\"FirstName\" : \"Chris\", \"LastName\" : \"cains\", \"AGE\":20,\"ADDRESS\" :\"BHAVNAGAR\",   \"CreatedBy\" : \"Admin\" }\r\n\r\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "AddCandidateToCategory",
+			"request": {
+				"url": {
+					"raw": "https://localhost:44319/api/Candidates/AddCandidateToCategory?categoryId=7&peopleId=11",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44319",
+					"path": [
+						"api",
+						"Candidates",
+						"AddCandidateToCategory"
+					],
+					"query": [
+						{
+							"key": "categoryId",
+							"value": "7",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "peopleId",
+							"value": "11",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteUser",
+			"request": {
+				"url": "https://localhost:44319/api/Users/7",
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get CAegoryCategory",
+			"request": {
+				"url": "https://localhost:44319/api/Candidates",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ChangeAge",
+			"request": {
+				"url": "https://localhost:44319/api/Voters/ChangeAge",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"voterId\" : 6, \"age\": 5}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetVotesOfCandidate",
+			"request": {
+				"url": "https://localhost:44319/api/Candidates/VotesOfCandidate/2",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Categories",
+			"request": {
+				"url": "https://localhost:44319/api/Categories/2",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
