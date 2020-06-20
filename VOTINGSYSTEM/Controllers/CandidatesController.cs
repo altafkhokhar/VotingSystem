@@ -7,10 +7,10 @@ namespace VotingSystem.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CandidateController : VotingSystemBaseController<Candidate>
+    public class CandidatesController : VotingSystemBaseController<Candidate>
     {
         private ICandidateService CandidateService;
-        public CandidateController( ICandidateService candidateService) : base(candidateService)
+        public CandidatesController( ICandidateService candidateService) : base(candidateService)
         {
             CandidateService = candidateService;
         }

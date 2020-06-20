@@ -57,15 +57,13 @@ namespace VOTINGSYSTEM
             string connectionString = Configuration.GetConnectionString("VOTINGSYSTEM_DB_STRING");
             services.AddDbContext<VotingDBContext>(options => options.UseSqlServer(connectionString));
            
-
-
             services.AddScoped<ICategoryService,CategoryService>();
 
-            services.AddScoped<IVoterService, VoterService>();
-
-
+            
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPeopleService, PeopleService>();
+            services.AddScoped<IVoterService, VoterService>();
+
             services.AddScoped<ICandidateService, CandidateService>();
         }
     }

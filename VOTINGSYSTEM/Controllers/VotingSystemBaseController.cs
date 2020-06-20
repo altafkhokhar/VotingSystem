@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using VotingSystem.Contract;
 using VotingSystem.Contract.Services;
+using VotingSystem.Models;
 using VotingSystem.Service;
 
 namespace VotingSystem.API.Controllers
@@ -28,13 +29,18 @@ namespace VotingSystem.API.Controllers
 
         [HttpPost]
         public void Add([FromBody] TModel item)
-        {
-            this.BaseService.Add(item);
-            this.BaseService.SaveChanges();
+        {   
+                this.BaseService.Add(item);
+                this.BaseService.SaveChanges();            
         }
 
-       
 
+        [HttpGet("{id}")] //api/Category/1
+        public virtual TModel GetItem([FromRoute] int id)
+        {   
+            return this.BaseService.Get(id).Result;
+         
+        }
 
     }
 }

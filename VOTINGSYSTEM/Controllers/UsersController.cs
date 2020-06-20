@@ -7,10 +7,10 @@ namespace VotingSystem.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : VotingSystemBaseController<User>
+    public class UsersController : VotingSystemBaseController<User>
     {
         private IUserService userService;
-        public UserController(IUserService paramUserService) : base(paramUserService)
+        public UsersController(IUserService paramUserService) : base(paramUserService)
         {
             userService = paramUserService;
         }
