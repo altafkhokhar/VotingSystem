@@ -35,10 +35,16 @@ namespace VotingSystem.API.Controllers
         }
 
 
-        [HttpGet("{id}")] //api/Category/1
-        public virtual TModel GetItem([FromRoute] int id)
-        {   
-            return this.BaseService.Get(id).Result;
+        [HttpGet("{id}")] //api/Categories/2
+        public virtual ActionResult<TModel> GetItem([FromRoute] int id)
+        {
+            TModel item = null;
+            if (!this.BaseService.TryGet(id, out item))
+            {
+                return NotFound();
+            }
+
+            return item;
          
         }
 

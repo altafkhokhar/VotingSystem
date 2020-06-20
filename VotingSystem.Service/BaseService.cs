@@ -26,6 +26,17 @@ namespace VotingSystem.Service
             return DatabaseContext.Set<TModel>().FindAsync(id);
         }
 
+        public bool TryGet(int id, out TModel item)
+        {
+            item =  DatabaseContext.Set<TModel>().FindAsync(id).Result;
+            if (item == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public Task<List<TModel>> GetAll()
         {
             return DatabaseContext.Set<TModel>().ToListAsync();

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VotingSystem.Contract.Services;
@@ -45,9 +46,16 @@ namespace VotingSystem.API.Controllers
         }
 
         [HttpGet("{id}")] //api/Voters/1
-        public override People GetItem([FromRoute] int id)
+        public override ActionResult<People> GetItem([FromRoute] int id)
         {
-            return this.voterService.Get(id).Result.People;
+
+            Voter item = null;
+            if (!this.voterService.TryGet(id, out item))
+            {
+                return NotFound();
+            }
+
+            return item.People;
 
         }
     }

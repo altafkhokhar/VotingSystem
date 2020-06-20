@@ -8,6 +8,7 @@ namespace VotingSystem.Contract.Services
     public interface IBaseService<TModel>
     {
         ValueTask<TModel> Get(int id);
+        bool TryGet(int id, out TModel item);
         Task<List<TModel>> GetAll();
         void Add(TModel entity);
         void Remove(TModel entity);
