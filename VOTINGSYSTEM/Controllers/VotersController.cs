@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,11 +11,11 @@ namespace VotingSystem.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VotersController :  VotingSystemBaseController<People>
+    public class VotersController :  VotingSystemBaseController<Voter>
     {
         private IPeopleService peopleService;
         private IVoterService voterService;
-        public VotersController(IPeopleService paramService, IVoterService paeramVoterService) : base(paramService)
+        public VotersController(IPeopleService paramService, IVoterService paeramVoterService) : base(paeramVoterService)
         {
             peopleService = paramService;
             voterService = paeramVoterService;
@@ -22,10 +23,16 @@ namespace VotingSystem.API.Controllers
 
         [HttpPost]
         [Route("RegisterVoter")] 
-        public  int RegisterVoter(PersonDTO newVoter)
+        public  ActionResult RegisterVoter(PersonDTO newVoter)
         {
-            return  peopleService.RegisterVoter(newVoter);
-            
+            if (!peopleService.RegisterVoter(ref newVoter))
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+            newVoter.User = null;
+            return Created(nameof(GetItem), newVoter);
+
         }
 
 
@@ -46,7 +53,7 @@ namespace VotingSystem.API.Controllers
         }
 
         [HttpGet("{id}")] //api/Voters/1
-        public override ActionResult<People> GetItem([FromRoute] int id)
+        public override ActionResult<Voter> GetItem([FromRoute] int id)
         {
 
             Voter item = null;
@@ -55,7 +62,7 @@ namespace VotingSystem.API.Controllers
                 return NotFound();
             }
 
-            return item.People;
+            return item;
 
         }
     }

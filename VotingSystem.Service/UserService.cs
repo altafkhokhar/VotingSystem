@@ -22,12 +22,12 @@ namespace VotingSystem.Service
                 var userDetail = this.DatabaseContext.User.Where(wh => wh.UserId == userId).FirstOrDefault();
                 var result = ValidateForDeleteUser(userDetail);
 
-                this.DatabaseContext.User.Remove(userDetail);
+                userDetail.IsDeleted = true;
                 this.DatabaseContext.SaveChanges();
             }
             catch
             {
-                throw;
+                return false;
             }
             return true;
         }

@@ -18,48 +18,62 @@ namespace VotingSystem.Service
             PeopleService = peopleService;
         }
 
-        public bool AddCandidateToCategory(int categoryId, int peopleId)
+        public bool TryAddCandidateToCategory(int categoryId, int peopleId)
         {
-            this.Add(new Candidate { CategoryId = categoryId, PeopleId = peopleId, CreatedBy="Admin" });
-            this.SaveChanges();
+            try
+            {
+                this.Add(new Candidate { CategoryId = categoryId, PeopleId = peopleId, CreatedBy = "Admin" });
+                this.SaveChanges();
+            }
+            catch
+            {
+                return false;
+            }
             return true;
         }
 
-        public int RegisterCandidate(CandidateDTO newCandidate)
+        public bool TryRegisterCandidate(ref CandidateDTO newCandidate)
         {
-            int result = 0;
-            //1.Candidate 2.Voter
-            if (newCandidate.Person != null && newCandidate.Person.User != null)
+            try
             {
-                User user = new User();
-                user.UserName = newCandidate.Person.User.UserName;
-                user.Password = newCandidate.Person.User.Password;
-                user.CreatedBy = "Admin";
-                
-                UserService.Add(user);
-                
-                People person = new People();
-                person.Address = newCandidate.Person.Address;
-                person.Age = newCandidate.Person.Age;
-                person.CreatedBy = "Admin";
-                person.FirstName = newCandidate.Person.FirstName;
-                person.LastName = newCandidate.Person.LastName;
-                
-                person.User = user;
 
-                PeopleService.Add(person);
+                //1.Candidate 2.Voter
+                if (newCandidate.Person != null && newCandidate.Person.User != null)
+                {
+                    User user = new User();
+                    user.UserName = newCandidate.Person.User.UserName;
+                    user.Password = newCandidate.Person.User.Password;
+                    user.CreatedBy = "Admin";
 
-                Candidate candidate = new Candidate();
-                candidate.CategoryId = newCandidate.CategoryId;
-                candidate.CreatedBy = "Admin";
-                candidate.People = person;
+                    UserService.Add(user);
 
-                this.Add(candidate);
-                
-                result = this.SaveChanges();
+                    People person = new People();
+                    person.Address = newCandidate.Person.Address;
+                    person.Age = newCandidate.Person.Age;
+                    person.CreatedBy = "Admin";
+                    person.FirstName = newCandidate.Person.FirstName;
+                    person.LastName = newCandidate.Person.LastName;
+
+                    person.User = user;
+
+                    PeopleService.Add(person);
+
+                    Candidate candidate = new Candidate();
+                    candidate.CategoryId = newCandidate.CategoryId;
+                    candidate.CreatedBy = "Admin";
+                    candidate.People = person;
+
+                    this.Add(candidate);
+
+                    this.SaveChanges();
+                }
+            }
+            catch(Exception ex)
+            {
+                return false;
             }
 
-            return result;
+            return true;
         }
 
         public dynamic GetVotesOfCandidate(int candidateId)

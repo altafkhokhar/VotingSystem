@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using VotingSystem.Contract;
+using Microsoft.AspNetCore.Http;
+
 using VotingSystem.Contract.Services;
-using VotingSystem.Models;
-using VotingSystem.Service;
 
 namespace VotingSystem.API.Controllers
 {
@@ -23,15 +23,24 @@ namespace VotingSystem.API.Controllers
 
         [HttpGet]
         public async Task<IEnumerable<TModel>> Get()
-        {
-            return await this.BaseService.GetAll();
-        }
+        {  
+                return await this.BaseService.GetAll();
+         }
 
         [HttpPost]
-        public void Add([FromBody] TModel item)
-        {   
-                this.BaseService.Add(item);
-                this.BaseService.SaveChanges();            
+        public ActionResult<TModel> Add([FromBody] TModel item)
+        {
+            try
+            {
+                this.BaseService.TryAdd(ref item);
+            }
+            catch //Logger out of scope
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+            //var createdResult = new CreatedResult();
+            return Created(nameof(GetItem), item );
+            //return ("Resource created successfully!");
         }
 
 
@@ -39,9 +48,17 @@ namespace VotingSystem.API.Controllers
         public virtual ActionResult<TModel> GetItem([FromRoute] int id)
         {
             TModel item = null;
-            if (!this.BaseService.TryGet(id, out item))
+            try
             {
-                return NotFound();
+                if (!this.BaseService.TryGet(id, out item))
+                {
+                    return NotFound();
+                }
+
+            }
+            catch //Logger out of scope
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
             return item;

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using VotingSystem.Contract.Services;
 using VotingSystem.DTO;
@@ -22,38 +23,43 @@ namespace VotingSystem.Service
             return this.DatabaseContext.Voter.AsQueryable();
         }
 
-        public int RegisterVoter(PersonDTO newVoter)
+        public bool RegisterVoter(ref PersonDTO newVoter)
         {
-
-            int result = 0;
-            //1.Candidate 2.Voter
-            if (newVoter != null && newVoter.User != null)
+            try
             {
-                User user = new User();
-                user.UserName = newVoter.User.UserName;
-                user.Password = newVoter.User.Password;
-                user.CreatedBy = "Admin";
-                UserService.Add(user);
-                
-                People person = new People();
-                person.Address = newVoter.Address;
-                person.Age = newVoter.Age;
-                person.CreatedBy = "Admin";
-                person.FirstName = newVoter.FirstName;
-                person.LastName = newVoter.LastName;
-                person.User = user;
-                
-                this.Add(person);
+                 //1.Candidate 2.Voter
+                if (newVoter != null && newVoter.User != null)
+                {
+                    User user = new User();
+                    user.UserName = newVoter.User.UserName;
+                    user.Password = newVoter.User.Password;
+                    user.CreatedBy = "Admin";
+                    UserService.Add(user);
 
-                Voter voter = new Voter();
-                voter.People = person;
-                voter.CreatedBy = "Admin";
-                VoterService.Add(voter);
+                    People person = new People();
+                    person.Address = newVoter.Address;
+                    person.Age = newVoter.Age;
+                    person.CreatedBy = "Admin";
+                    person.FirstName = newVoter.FirstName;
+                    person.LastName = newVoter.LastName;
+                    person.User = user;
 
-                result = this.SaveChanges();
+                    this.Add(person);
+                    this.SaveChanges();
+
+                    Voter voter = new Voter();
+                    voter.People = person;
+                    voter.CreatedBy = "Admin";
+                    VoterService.Add(voter);
+
+                    this.SaveChanges();
+                }
             }
-
-            return result;
+            catch(Exception ex)
+            {
+                return false;
+            }
+            return true;
         }
 
         public int VoteForCandidate(int voterId, int candidateId, int categoryId)

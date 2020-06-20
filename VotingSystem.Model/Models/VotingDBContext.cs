@@ -160,7 +160,7 @@ namespace VotingSystem.Models
 
                 modelBuilder.Entity<Voter>(entity =>
                 {
-                    entity.Property(e => e.VoterId).ValueGeneratedNever();
+                    entity.Property(e => e.VoterId);
 
                     entity.Property(e => e.CreatedBy)
                         .IsRequired()

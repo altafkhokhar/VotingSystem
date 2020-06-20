@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using VotingSystem.Contract.Services;
 using VotingSystem.DTO;
 using VotingSystem.Models;
@@ -17,18 +18,26 @@ namespace VotingSystem.API.Controllers
 
         [HttpPost]
         [Route("PostCandidate")] //api/PostCandidate
-        public int PostCandidate(CandidateDTO candidate)
+        public ActionResult PostCandidate(CandidateDTO candidate)
         {
-            return CandidateService.RegisterCandidate(candidate);
+            
+            if (!CandidateService.TryRegisterCandidate(ref candidate))
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        
+            return Created(nameof(GetItem), candidate);
         }
 
         [HttpPost]
         [Route("AddCandidateToCategory")] //api/Voters/GetVoterById? id = 2
-        public int AddCandidateToCategory(int categoryId, int peopleId)
+        public ActionResult AddCandidateToCategory(int categoryId, int peopleId)
         {
-            this.CandidateService.AddCandidateToCategory(categoryId, peopleId);
-            var result = this.BaseService.SaveChanges();
-            return result;
+            if (!this.CandidateService.TryAddCandidateToCategory(categoryId, peopleId))
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+            return StatusCode(StatusCodes.Status200OK); 
         }
 
         [HttpGet]

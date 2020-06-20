@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VotingSystem.Contract.Services;
 using VotingSystem.Models;
@@ -15,11 +16,17 @@ namespace VotingSystem.API.Controllers
             userService = paramUserService;
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [Route("DeleteUser")]
-        public void DeleteUser(int id)
+        public ActionResult DeleteUser([FromRoute]int id)
         {
-            userService.DeleteUser(id);
+            if (!userService.DeleteUser(id))
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+            return StatusCode(StatusCodes.Status410Gone);
+
         }
     }
   

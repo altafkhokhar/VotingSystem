@@ -21,7 +21,20 @@ namespace VotingSystem.Service
             DatabaseContext.Set<TModel>().Add(entity);
         }
 
-        public ValueTask<TModel> Get(int id)
+        /// <summary>
+        /// It will add record in respective table and also perform savechanges.
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public bool TryAdd(ref TModel entity)
+        {
+            DatabaseContext.Set<TModel>().Add(entity);
+            DatabaseContext.SaveChanges();
+
+            return true;
+        }
+
+    public ValueTask<TModel> Get(int id)
         {
             return DatabaseContext.Set<TModel>().FindAsync(id);
         }

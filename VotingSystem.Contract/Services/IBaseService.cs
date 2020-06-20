@@ -11,6 +11,8 @@ namespace VotingSystem.Contract.Services
         bool TryGet(int id, out TModel item);
         Task<List<TModel>> GetAll();
         void Add(TModel entity);
+
+        bool TryAdd(ref TModel entity);
         void Remove(TModel entity);
 
       
