@@ -8,6 +8,9 @@ using static VotingSystem.Contract.Helpers.VSHelper;
 
 namespace VotingSystem.Service
 {
+    /// <summary>
+    /// This service perform operation related to Person
+    /// </summary>
     public class PeopleService : BaseService<People>, IPeopleService
     {
         private readonly IUserService UserService;
@@ -18,16 +21,26 @@ namespace VotingSystem.Service
             VoterService = paramVoterService;
         }
 
+        /// <summary>
+        /// It will return all voters
+        /// </summary>
+        /// <returns></returns>
         public IQueryable<Voter> GetAllVoters()
         {
+            //since there is no provision of deletion of voter hence fetching all.
             return this.DatabaseContext.Voter.AsQueryable();
         }
 
+        /// <summary>
+        /// It registers new voter to the system
+        /// </summary>
+        /// <param name="newVoter"></param>
+        /// <returns></returns>
         public int RegisterVoter(ref PersonDTO newVoter)
         {
             try
             {
-                if (newVoter.Age < 18)
+                if (newVoter.Age < MIN_AGE_FOR_VOTING)
                 {
                     return -2; // can not register as voter since person is below 18
                 }
@@ -67,6 +80,14 @@ namespace VotingSystem.Service
             return 1;
         }
 
+
+        /// <summary>
+        /// It submit vot for candidate from voter to particular category
+        /// </summary>
+        /// <param name="voterId"></param>
+        /// <param name="candidateId"></param>
+        /// <param name="categoryId"></param>
+        /// <returns></returns>
         public int VoteForCandidate(int voterId, int candidateId, int categoryId)
         {
             this.DatabaseContext.Vote.Add(new Vote() { CandidateId = candidateId, CategoryId = categoryId, VoterId = voterId });

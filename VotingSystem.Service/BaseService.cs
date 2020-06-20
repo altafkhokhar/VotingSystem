@@ -6,6 +6,10 @@ using VotingSystem.Models;
 
 namespace VotingSystem.Service
 {
+    /// <summary>
+    /// Its base service class and do many common operations in generic way.
+    /// </summary>
+    /// <typeparam name="TModel"></typeparam>
     public abstract class BaseService<TModel> : IBaseService<TModel> where TModel : class
     {
 

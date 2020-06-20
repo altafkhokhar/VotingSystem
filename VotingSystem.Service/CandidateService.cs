@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using VotingSystem.Contract.Services;
 using VotingSystem.DTO;
@@ -7,6 +8,9 @@ using VotingSystem.Models;
 
 namespace VotingSystem.Service
 {
+    /// <summary>
+    /// This service perform operation related to Candidate
+    /// </summary>
     public class CandidateService : BaseService<Candidate>, ICandidateService 
     {
         private readonly IUserService UserService;
@@ -18,6 +22,13 @@ namespace VotingSystem.Service
             PeopleService = peopleService;
         }
 
+
+        /// <summary>
+        /// It will add candidate to category after validation
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <param name="peopleId"></param>
+        /// <returns></returns>
         public int TryAddCandidateToCategory(int categoryId, int peopleId)
         {
             try
@@ -38,6 +49,12 @@ namespace VotingSystem.Service
             return 1; // done.
         }
 
+
+        /// <summary>
+        /// It registers new candidate
+        /// </summary>
+        /// <param name="newCandidate"></param>
+        /// <returns></returns>
         public bool TryRegisterCandidate(ref CandidateDTO newCandidate)
         {
             try
@@ -82,11 +99,26 @@ namespace VotingSystem.Service
             return true;
         }
 
-        public dynamic GetVotesOfCandidate(int candidateId)
+
+        /// <summary>
+        /// It will return vote counts of candidate
+        /// </summary>
+        /// <param name="candidateId"></param>
+        /// <returns></returns>
+        public IList<CandidateResult> GetVotesOfCandidate(int candidateId)
         {
-            //this.DatabaseContext.Votes.GroupBy(x=> x.CategoryId).Select()
+            try
+            {   
+                List<CandidateResult> candidateResults = new List<CandidateResult>();
+                //todo
+                return candidateResults;
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+
             return null;
-        
         }
     }
 }

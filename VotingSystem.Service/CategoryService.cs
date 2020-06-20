@@ -6,6 +6,9 @@ using VotingSystem.Models;
 
 namespace VotingSystem.Service
 {
+    /// <summary>
+    /// This service perform operation related to Category
+    /// </summary>
     public class CategoryService : BaseService<Category>, ICategoryService
     {
         public CategoryService(VotingDBContext context) :base(context)
