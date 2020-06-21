@@ -53,5 +53,7 @@ We have used OOPs concept as well as couple of SOLID principles as APPLICABLE.
  We can enhance this approach with design patterns based on problem area but in this scope and timeline we have not considered all and.
  
  
+ For TESTING : To test this REST API i have added post man file at root directory. You can import this postman collection file and test all api
+ 
  Thanking you
  
