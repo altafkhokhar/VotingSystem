@@ -30,3 +30,28 @@ It has below projects :
     Instnaces of service class in web api layer are injected by DI
     Controller constructor has only interface reference
     
+
+We have used OOPs concept as well as couple of SOLID principles as APPLICABLE.
+-   OOPS :
+    -   Inheritence (Service class, Controller)
+    -   Method Overriding (controlle 's GetItem, 
+-   SOLID Principles :
+    -   S:  Developed all the class to have only one responsibility and one reason to change.
+            Ex service class, DTO class
+    -   O:  Open for extension and close for modification
+    -   L:  Liskove subsitution principle :
+            Derivative class can be replaced by base class (VoterService class)
+    -   I:  Interface segeregation :
+            Every interface are thin and properly grained to serve it purpose rather developing fat interfaces.
+    -   D:  Dependency Inversion
+            I have implemented DI using .net core inbuild DI
+            Ex service instances are injected automatically in controller constructor withou using new keyword
+ 
+ This is just developed for demo purpose considering given business flow and few assumtion.
+ OUT OF SCOPE : logging, authentication, error handling, concurrency etc.
+ 
+ We can enhance this approach with design patterns based on problem area but in this scope and timeline we have not considered all and.
+ 
+ 
+ Thanking you
+ 
