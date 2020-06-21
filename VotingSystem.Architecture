@@ -1,0 +1,32 @@
+VotingSyste - System Architecture and Design
+As per scoped document base framework, design and features has been developed.
+There is always scope of improvement to any design and frammework. We have developed architectural bas and implemented given features.
+There are couple of use case(s) were it require more analysis to make it more robust since it just demo we made few assumtions.
+
+It has below projects :
+1- VotingSystem.API
+    It is REST API developed in asp.net core using c#. The user will interact with system using REST API.
+    It has below implementation
+      Routing
+      HTTP pipeline
+      IOC implementation using inbuild DI
+      Instance of Service and db context are injected based on requirement without concretation.
+      
+2- VotingSystem.Contract :
+    It contains interfaces(contract) implemented by services and consumed by web api(Controller)
+
+3- VotingSystem.DTO  :
+    It has Data Transport Object that will be referred use to transfer data from one layer to another layer of system.
+
+4- VotingSystem.Models  :
+    This project has domain model created from database table. It has ORM context that performs db operations.
+    In this demo i have used Microsoft.EntityFramework.Core.
+    
+5- VotingSystem.Service  :
+    It performs business implementations, domain logic and validations 
+    It has dependency of VotingSystem.Models for ORM and domain model
+    It implements respective contract of VotingSystem.Contract
+    It has base service that is performing common operationa and tasks
+    Instnaces of service class in web api layer are injected by DI
+    Controller constructor has only interface reference
+    
